@@ -8,7 +8,41 @@ const routerObj = [
     children: [
       {
         path: "/",
-        element: <Home />,
+        element: (
+          <Home
+            name="Testing"
+            dataRows={[
+              {
+                date: "20 DEC, 2022",
+                appliedJobs: 3,
+                interviews: 4,
+                submittedTasks: 3,
+                rejections: 4,
+              },
+              {
+                date: "20 DEC, 2022",
+                appliedJobs: 3,
+                interviews: 4,
+                submittedTasks: 3,
+                rejections: 4,
+              },
+              {
+                date: "20 DEC, 2022",
+                appliedJobs: 3,
+                interviews: 4,
+                submittedTasks: 3,
+                rejections: 4,
+              },
+              {
+                date: "20 DEC, 2022",
+                appliedJobs: 3,
+                interviews: 4,
+                submittedTasks: 3,
+                rejections: 4,
+              },
+            ]}
+          />
+        ),
       },
     ],
   },

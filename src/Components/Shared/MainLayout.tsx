@@ -65,9 +65,9 @@ export default function MainLayout() {
       {/* mobilenav */}
       <MobileNav display={{ base: "flex", md: "none" }} onOpen={onOpen} />
       <Box ml={{ base: 0, md: 60 }} p="4">
-        <Container mt={{ base: 0, md: 60, lg: 100 }}>
+        <Box mt={{ base: 0, md: 60, lg: 100 }}>
           <Outlet />
-        </Container>
+        </Box>
       </Box>
     </Box>
   );
