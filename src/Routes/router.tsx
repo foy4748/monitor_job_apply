@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import MainLayout from "../Components/Shared/MainLayout";
 import Home from "../Components/Home";
+import UserInfo from "../Components/UserInfo";
 const routerObj = [
   {
     path: "/",
@@ -10,7 +11,8 @@ const routerObj = [
         path: "/",
         element: (
           <Home
-            name="Testing"
+            id="test"
+            name="Overview"
             dataRows={[
               {
                 date: "20 DEC, 2022",
@@ -43,6 +45,10 @@ const routerObj = [
             ]}
           />
         ),
+      },
+      {
+        path: "/:id",
+        element: <UserInfo />,
       },
     ],
   },

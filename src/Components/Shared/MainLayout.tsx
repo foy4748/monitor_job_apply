@@ -1,7 +1,8 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, Link as RLink } from "react-router-dom";
 
 const { VITE_AppName: AppName } = import.meta.env;
 import React, { ReactNode } from "react";
+import NavBar from "./NavBar";
 import {
   IconButton,
   Box,
@@ -31,14 +32,16 @@ import { ReactText } from "react";
 
 interface LinkItemProps {
   name: string;
-  icon: IconType;
+  path: string;
+  icon?: IconType | undefined;
 }
 const LinkItems: Array<LinkItemProps> = [
-  { name: "Overview", icon: FiHome },
-  { name: "Trending", icon: FiTrendingUp },
-  { name: "Explore", icon: FiCompass },
-  { name: "Favourites", icon: FiStar },
-  { name: "Settings", icon: FiSettings },
+  { name: "Overview", path: "/", icon: FiHome },
+  { name: "Md. Shourov Hasan", path: "01" },
+  { name: "MD Abdulla Hale Baki", path: "02" },
+  { name: "AB. MD. FAISAL RAHMAN", path: "03" },
+  { name: "Moinul Islam", path: "04" },
+  { name: "Md. Faizul Osman", path: "05" },
 ];
 
 export default function MainLayout() {
@@ -59,13 +62,14 @@ export default function MainLayout() {
         size="full"
       >
         <DrawerContent>
-          <SidebarContent onClose={onClose} />
+          <SidebarContent isOpen={isOpen} onClose={onClose} />
         </DrawerContent>
       </Drawer>
       {/* mobilenav */}
       <MobileNav display={{ base: "flex", md: "none" }} onOpen={onOpen} />
       <Box ml={{ base: 0, md: 60 }} p="4">
-        <Box mt={{ base: 0, md: 60, lg: 100 }}>
+        <NavBar />
+        <Box mt={{ base: 4, md: 8, lg: 8 }}>
           <Outlet />
         </Box>
       </Box>
@@ -75,9 +79,10 @@ export default function MainLayout() {
 
 interface SidebarProps extends BoxProps {
   onClose: () => void;
+  isOpen: boolean;
 }
 
-const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
+const SidebarContent = ({ isOpen, onClose, ...rest }: SidebarProps) => {
   return (
     <Box
       bg={useColorModeValue("white", "gray.900")}
@@ -95,7 +100,12 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
         <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (
-        <NavItem key={link.name} icon={link.icon}>
+        <NavItem
+          key={link.name}
+          icon={link?.icon}
+          to={link.path}
+          onClick={() => isOpen && onClose()}
+        >
           {link.name}
         </NavItem>
       ))}
@@ -105,12 +115,13 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
 
 interface NavItemProps extends FlexProps {
   icon: IconType;
-  children: ReactText;
+  to: string;
 }
-const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
+const NavItem = ({ icon, to, children, ...rest }: NavItemProps) => {
   return (
     <Link
-      href="#"
+      as={RLink}
+      to={to}
       style={{ textDecoration: "none" }}
       _focus={{ boxShadow: "none" }}
     >
