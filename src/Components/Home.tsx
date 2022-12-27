@@ -10,38 +10,12 @@ import {
   Heading,
 } from "@chakra-ui/react";
 
-interface TableRow {
-  date: string;
-  appliedJobs: number;
-  submittedTasks: number;
-  interviews: number;
-  rejections: number;
-}
+import { TableRows, TableRow } from "../Interfaces/TableData";
 
-interface TableRows {
-  name: string;
-  dataRows: TableRow[];
-}
-
-// Related to Redux-Toolkit
-import { useSelector, useDispatch } from "react-redux";
-import type { RootState } from "../Slices/store";
-import { getTodoAsync, showTodo } from "../Slices/TestSlice";
 export default function Home({ name, dataRows }: TableRows) {
-  const dispatch = useDispatch();
-  const initialValue = useSelector(showTodo);
-  console.log(initialValue);
   return (
     <Box>
       <Heading as="h1">{name}</Heading>
-      <button
-        onClick={() => {
-          dispatch(getTodoAsync("5"));
-          console.log("hit");
-        }}
-      >
-        Testing
-      </button>
       <TableContainer>
         <Table variant="striped" colorScheme="teal" size="lg">
           <Thead>
